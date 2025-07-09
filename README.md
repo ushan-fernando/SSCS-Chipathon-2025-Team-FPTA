@@ -12,9 +12,8 @@
 ---
 
 ## Team Information and Background
-* Kelvin Zigah - 2<sup>nd</sup> year undergraduate in Electrical Engineering at Concordia University
-* Ushan Fernando - 4<sup>th</sup> year undergraduate in Electrical and Electronic Engineering at University of Nottingham Malaysia
 * Jason Lyst - 2<sup>nd</sup> year undergraduate in Electrical and Computer Engineering at Purdue University
+* Ushan Fernando - 4<sup>th</sup> year undergraduate in Electrical and Electronic Engineering at University of Nottingham Malaysia
 * Sanithu Heengama - 3<sup>rd</sup> year undergraduate in Electrical Engineering at Brown University
 
 ---
