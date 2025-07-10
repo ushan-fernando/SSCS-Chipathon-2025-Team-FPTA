@@ -12,16 +12,18 @@
 ---
 
 ## Introduction and Motivation
-To support hands-on learning and deepen intuition in analog circuit design for electrical engineering students and hobbyists learning analog IC design, we propose a MOSbius-based Field Programmable Transistor Array (FPTA) architecture that enables reconfiguration and testing of multiple amplifier topologies. By dynamically switching transistor-level connections, users can explore and compare different analog amplifier designs, such as those illustrated in Figure 1.
+To support hands-on learning and deepen intuition in analog circuit design for electrical engineering students and hobbyists learning analog IC design, we propose a MOSbius-based Field Programmable Transistor Array (FPTA) architecture that enables reconfiguration and testing of multiple amplifier topologies. By dynamically switching transistor-level connections, users can explore and compare different analog amplifier designs from simple single stage amplifiers such as common source and cascode to more complex amplifiers such as a single stage OTA, two stage OTA, telescopic cascode amplifier, and folded cascode amplifier. The illustration below presents a few of these stages.
 
-[Placeholder for Figure 1]
+<p style="padding-top:1em">
+<img src="images/amplifier-topologies.png" alt="drawing" width="800"/>
+<p>
 
 ---
 
 ## Project Datasheet
 
 #### Overview
-Figure 2 presents a high level overview of the chip design with its required sub-blocks. In order to be able to construct the desired amplifier circuits, the following blocks are required:
+The block diagram below presents a high level overview of the chip design with its required sub-blocks. In order to be able to construct the desired amplifier circuits, the following blocks are required:
 
 * 2 × NMOS Transistors
 * 2 × NMOS Cascode Stage
@@ -35,7 +37,9 @@ Figure 2 presents a high level overview of the chip design with its required sub
 * PMOS Current Mirror with Source Connected to Pin (1×)
 * Switch Matrix for Reconfiguration (60 pins × bus-width of 10)
 
-[Placeholder for Figure 2]
+<p style="padding-top:1em">
+<img src="images/mosbius-block-diagram.png" alt="drawing" width="800"/>
+<p>
 
 #### General Chip Specifications
 *Note: Specifications for the individual blocks will be determined after initial simulations
@@ -66,10 +70,12 @@ Figure 2 presents a high level overview of the chip design with its required sub
 | 45 - 48 | IO[39] - IO[42] | Analog I/O | PMOS Cascode Stage Pins |
 | 49 - 53 | IO[43] - IO[47] | Analog I/O | PMOS Differential Pair Pins |
 | 54 - 59 | IO[48] - IO[53] | Analog I/O | PMOS Current Mirror Pins |
-| 61 - 64 | IO[54] - IO[57] | Analog I/O | PMOS Current Mirror with Sources Connected to I/O Pins |
+| 60 - 63 | IO[54] - IO[57] | Analog I/O | PMOS Current Mirror with Sources Connected to I/O Pins |
 
 #### Application Diagram
-[Placeholder Application Diagram]
+<p style="padding-top:1em">
+<img src="images/application-diagram.png" alt="drawing" width="800"/>
+<p>
 
 ---
 
