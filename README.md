@@ -1,16 +1,22 @@
-# IIC-OSIC-TOOLS Analog Design Project Template (GlobalFoundries 180nm)
+# IEEE SSCS Chipathon 2025 - MOSbius Track: Team FPTA
 
-This repository is a project template for the IIC-OSIC-TOOLS (https://github.com/iic-jku/IIC-OSIC-TOOLS) analog design workflow for the SSCS 2025 Chipathon, preconfigured for the GlobalFoundries 180nm PDK (gf180mcuD).
+## Design of Amplifier Circuits using the MOSbius Architecture
 
-## What's Included
+<p align="center">
+  <img src="https://img.shields.io/badge/Technology-gf180mcuD-blue?style=for-the-badge" alt="Chipathon 2025"/>
+  <img src="https://img.shields.io/badge/Type-Analog IC Design-blueviolet?style=for-the-badge" alt="MOSbius Track"/>
+  <img src="https://img.shields.io/badge/Project--Status-Planning-green?style=for-the-badge" alt="MOSbius Track"/>
+  <img src="https://img.shields.io/badge/License-MIT-lime?style=for-the-badge" alt="License: MIT"/>
+</p>
 
-When you use this template, you get:
+---
 
-- **Pre-configured Docker environment** with IIC-OSIC-TOOLS and GlobalFoundries 180nm PDK
-- **Cross-platform scripts** for launching the containerized design environment
-- **Example analog design** (5-Transistor OTA) with proper library structure and testbench
-- **Library organization standards** with validation scripts
-- **VNC and web-based GUI access** for design tools like Xschem, Magic, and KLayout
+## Team Information and Background
+* Jason Lyst - 2<sup>nd</sup> year undergraduate in Electrical and Computer Engineering at Purdue University
+* Ushan Fernando - 4<sup>th</sup> year undergraduate in Electrical and Electronic Engineering at University of Nottingham Malaysia
+* Sanithu Heengama - 3<sup>rd</sup> year undergraduate in Electrical Engineering at Brown University
+
+---
 
 ## Prerequisites
 
@@ -40,62 +46,29 @@ Docker is a lightweight, container-based alternative to virtual machines that en
 
 In this project we will be using the IIC-OSIC-TOOLS docker (https://github.com/iic-jku/IIC-OSIC-TOOLS) to setup our development environments.
 
+---
+
 ## Getting Started
 
-### Step 1: Create Your Project Repository
+### Step 1: Clone the Project Repository
 
-#### Use GitHub Template
-
-This repository is set up as a GitHub template. Using the template feature gives you a clean project without the template's commit history.
-
-1. Visit the template repository: [https://github.com/Jianxun/iic-osic-tools-project-template/](https://github.com/Jianxun/iic-osic-tools-project-template/)
-2. Click the green **"Use this template"** button
-3. Select **"Create a new repository"**
-4. Fill in your repository details:
-   - Repository name (e.g., `my-analog-design-project`)
-   - Description (optional)
-   - Choose public or private
-5. Click **"Create repository"**
-
-![GitHub "Use this template" button](docs/screenshots/using_github_template.png)
-
-**Clone your new repository using GitHub Desktop:**
 1. Open GitHub Desktop
 2. Click "Clone a repository from the Internet"
 3. Select your newly created repository
 4. Choose your local directory and click "Clone"
 
-![GitHub Desktop clone dialog](docs/screenshots/clone_your_repo.png)
-
 ### Step 2: Launch the Docker Container
 
-The project includes platform-specific scripts to launch the Docker container with the IIC-OSIC-TOOLS environment. Before running the following scripts, make sure your Docker Desktop is running.
+The project includes platform-specific scripts to launch the Docker container with the IIC-OSIC-TOOLS environment. Before running the following scripts, make sure your Docker Desktop is running. Launch the required script based on your operating system.
 
-#### For Mac/Unix/Linux Systems:
-Open a terminal, navigate to you repository, and use the following command:
-```bash
-./start_chipathon_vnc.sh
-```
-
-#### For Windows Systems:
-
-**Open Command Prompt or PowerShell** navigate to you repository, and use the following command:
-
-
-```cmd
-.\start_chipathon_vnc.bat
-```
-If you are familiar with git bash, feel free to use `start_chipathon_vnc.sh`.
-
-This will take a while to pull the latest IIC-OSIC-TOOLS image. Have a coffee.
-
-![Screenshot placeholder: Terminal showing container startup messages](docs/screenshots/docker_pull.png)
+* **Mac/Unix/Linux Systems:** Open a terminal, navigate to your repository, and use the following command  `./start_chipathon.sh`
+* **Windows Systems:** Open Command Prompt or Powershell, navigate to your repository, and use the following command `.\start_chipathon.bat`
 
 ### Step 3: Access the Design Environment
 
 Once the container is running, you have two options to access the design environment:
 
-#### Option A: VNC Client (Recommended for better performance)
+**Option A: VNC Client (Recommended for better performance)**
 1. Download a VNC client:
    - **Windows**: [TigerVNC](https://tigervnc.org) 
    - **macOS**: [TigerVNC](https://tigervnc.org)  or built-in Screen Sharing
@@ -104,13 +77,11 @@ Once the container is running, you have two options to access the design environ
 2. Connect to: `localhost:5901`
 3. Enter password: `abc123`
 
-
-#### Option B: Web Browser (noVNC)
+**Option B: Web Browser (noVNC)**
 1. Open your web browser
 2. Navigate to: `http://localhost`
 3. Enter password: `abc123`
 4. Click "Connect"
-
 
 ### Step 4: Open a Terminal
 
@@ -118,8 +89,6 @@ Once you're in the VNC session:
 1. Right-click on the desktop
 2. Select "Terminal Emulator" (or similar option)
 3. You should automatically be in the `/foss/designs` directory
-
-![Desktop context menu with Terminal Emulator option](docs/screenshots/open_a_terminal.png)
 
 ### Step 5: Project Directory Structure
 
@@ -146,8 +115,6 @@ Run the following command inside the terminal within the VNC session to set up t
 source setup_pdk.sh
 ```
 
-![Terminal showing PDK setup completion](docs/screenshots/setup_pdk.png)
-
 ### Step 7: Launch Design Tools
 
 Launch Xschem for schematic design:
@@ -157,7 +124,7 @@ xschem
 
 You should see the Xschem GUI with available devices from `gf180mcu` and their testbenches.
 
-![Xschem interface with PDK libraries loaded](docs/screenshots/start_xschem.png)
+---
 
 ## Troubleshooting
 
@@ -184,6 +151,7 @@ If you encounter issues:
 2. Restart the container: Stop and run the launch script again
 3. Create an issue in the repository for persistent problems
 
+---
 
 ## Library Structure Conventions
 
@@ -219,28 +187,7 @@ This script verifies:
 - Correct file naming conventions for design libraries
 - Exempts testbench libraries from strict naming requirements
 
-
-## Example Design: 5-Transistor Single Stage OTA
-
-This project includes a reference design to demonstrate the library structure and design flow:
-
-### Libraries
-- **Design**: 5-Transistor Single Stage Operational Transconductance Amplifier (OTA)
-- **Library Location**: `core_analog`
-- **Testbench Location**: `tb_analog`
-
-
-### Usage
-1. **Design Files**: Navigate to `/designs/libs/core_analog/` to find the schematics and symbols of the OTA cell and parameterized unit transistor cells.
-2. **Testbench**: Use the verification setups in `/designs/libs/tb_analog/` to simulate and characterize the design.
-3. **Validation**: Run the library check to ensure proper file organization:
-   ```bash
-   cd designs/CI
-   ./library_check.sh
-   ```
-
-This example demonstrates the proper use of the library naming conventions (`core_*` for design libraries, `tb_*` for testbenches) and serves as a starting point for developing your own analog circuits.
-
+---
 
 ## License
 
