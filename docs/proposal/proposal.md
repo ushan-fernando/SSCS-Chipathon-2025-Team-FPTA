@@ -84,6 +84,7 @@ The block diagram below presents a high level overview of the chip design with i
 * Jason Lyst - 2<sup>nd</sup> year undergraduate in Electrical and Computer Engineering at Purdue University
 * Ushan Fernando - 4<sup>th</sup> year undergraduate in Electrical and Electronic Engineering at University of Nottingham Malaysia
 * Sanithu Heengama - 3<sup>rd</sup> year undergraduate in Electrical Engineering at Brown University
+* Athesh Ganesh - 3<sup>rd</sup> year undergraduate in Electrical and Computer Engineering at the University of Waterloo
 
 |  Team Member | Role |
 | :---: | :---:|
