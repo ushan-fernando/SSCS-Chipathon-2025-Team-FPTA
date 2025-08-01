@@ -90,6 +90,7 @@ The block diagram below presents a high level overview of the chip design with i
 | Jason Lyst | Team Lead, Differential Pair Block and Switch Matrix Design|
 | Ushan Fernando | Current Mirror and Individual Transistor Blocks and Switch Matrix Design |
 | Sanithu Heengama| Cascode Block and Switch Matrix Design |
+| Athesh Ganesh | Cascode Block and Switch Matrix Design |
 
 ---
 
