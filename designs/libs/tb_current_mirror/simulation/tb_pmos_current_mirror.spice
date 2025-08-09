@@ -1,0 +1,78 @@
+** sch_path: /foss/designs/libs/tb_current_mirror/tb_pmos_current_mirror.sch
+**.subckt tb_pmos_current_mirror
+X_PCM net1 net2 net3 net4 net5 net6 net7 pmos_current_mirror
+VDD net1 GND 3.3
+Viout1x net3 out 0
+.save i(viout1x)
+Ibias net2 GND 100u
+Viout2x net4 out 0
+.save i(viout2x)
+Viout4x net5 out 0
+.save i(viout4x)
+Viout16x net7 out 0
+.save i(viout16x)
+Viout8x net6 out 0
+.save i(viout8x)
+VOUT out GND 3.3
+**** begin user architecture code
+
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+
+
+
+.control
+    save all
+
+    * Operating Point Analysis
+    op
+    show all > op.log
+
+    * DC Sweep
+    dc VOUT 0 3.3 10m
+    plot i(viout1x) i(viout2x) i(viout4x) i(viout8x) i(viout16x) vs v(out)
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  libs/core_current_mirror/pmos_current_mirror/pmos_current_mirror.sym # of pins=7
+** sym_path: /foss/designs/libs/core_current_mirror/pmos_current_mirror/pmos_current_mirror.sym
+** sch_path: /foss/designs/libs/core_current_mirror/pmos_current_mirror/pmos_current_mirror.sch
+.subckt pmos_current_mirror VDD I_ref 1x_I_ref 2x_I_ref 4x_I_ref 8x_I_ref 16x_I_ref
+*.iopin I_ref
+*.iopin VDD
+*.iopin 1x_I_ref
+*.iopin 2x_I_ref
+*.iopin 4x_I_ref
+*.iopin 8x_I_ref
+*.iopin 16x_I_ref
+XIREF I_ref VDD I_ref VDD unit_pmos M=1
+X1x 1x_I_ref VDD I_ref VDD unit_pmos M=1
+X2x 2x_I_ref VDD I_ref VDD unit_pmos M=2
+X4x 4x_I_ref VDD I_ref VDD unit_pmos M=4
+X8x 8x_I_ref VDD I_ref VDD unit_pmos M=8
+X16x 16x_I_ref VDD I_ref VDD unit_pmos M=16
+.ends
+
+
+* expanding   symbol:  libs/core_single_mos/unit_pmos/unit_pmos.sym # of pins=4
+** sym_path: /foss/designs/libs/core_single_mos/unit_pmos/unit_pmos.sym
+** sch_path: /foss/designs/libs/core_single_mos/unit_pmos/unit_pmos.sch
+.subckt unit_pmos drain sub gate source
+*.iopin drain
+*.iopin source
+*.iopin sub
+*.iopin gate
+**** begin user architecture code
+
+.param M=1
+
+**** end user architecture code
+XM1 drain gate source sub pfet_03v3 L=0.5u W=48u nf=8 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0 m={M}
+.ends
+
+.GLOBAL GND
+.end

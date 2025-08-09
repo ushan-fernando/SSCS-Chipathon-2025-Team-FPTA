@@ -1,0 +1,41 @@
+** sch_path: /foss/designs/libs/tb_single_mos/tb_single_pmos.sch
+**.subckt tb_single_pmos
+VB GND net1 1.0
+VDD GND net2 3.3
+XM1 net2 GND net1 GND unit_pmos M=1
+**** begin user architecture code
+
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+
+
+
+.control
+    save all
+    op
+    show all
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  libs/core_single_mos/unit_pmos/unit_pmos.sym # of pins=4
+** sym_path: /foss/designs/libs/core_single_mos/unit_pmos/unit_pmos.sym
+** sch_path: /foss/designs/libs/core_single_mos/unit_pmos/unit_pmos.sch
+.subckt unit_pmos drain sub gate source
+*.iopin drain
+*.iopin source
+*.iopin sub
+*.iopin gate
+**** begin user architecture code
+
+.param M=1
+
+**** end user architecture code
+XM1 drain gate source sub pfet_03v3 L=0.5u W=48u nf=8 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0 m={M}
+.ends
+
+.GLOBAL GND
+.end
