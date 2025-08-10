@@ -59,8 +59,8 @@ C {isource.sym} -470 -430 0 0 {name=Ibias value=100u}
 C {vsource.sym} -80 -340 0 0 {name=VOUT value=3.3 savecurrent=false}
 C {gnd.sym} -80 -300 0 0 {name=l3 lab=GND}
 C {ammeter.sym} -410 -580 0 0 {name=Viout1x savecurrent=true spice_ignore=0}
-C {lab_pin.sym} -60 -610 2 0 {name=p1 sig_type=std_logic lab=out}
 C {ammeter.sym} -370 -540 0 0 {name=Viout2x savecurrent=true spice_ignore=0}
 C {ammeter.sym} -330 -500 0 0 {name=Viout4x savecurrent=true spice_ignore=0}
 C {ammeter.sym} -250 -420 0 0 {name=Viout16x savecurrent=true spice_ignore=0}
 C {ammeter.sym} -290 -460 0 0 {name=Viout8x savecurrent=true spice_ignore=0}
+C {lab_pin.sym} -60 -610 2 0 {name=p2 sig_type=std_logic lab=out}

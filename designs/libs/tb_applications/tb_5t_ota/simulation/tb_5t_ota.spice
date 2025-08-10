@@ -1,0 +1,124 @@
+** sch_path: /foss/designs/libs/tb_applications/tb_5t_ota/tb_5t_ota.sch
+**.subckt tb_5t_ota
+X_DP net1 Vout GND Vout Vin net2 nmos_differential_pair
+X_NCM net5 net6 net7 net2 net8 net3 GND nmos_current_mirror
+X_PCM VDD VDD Vout net1 VDD pmos_current_mirror_sources_io
+VDD net4 GND 3.3
+I0 VDD net3 100u
+Vin Vin GND 1.65 AC 1
+R1 VDD net3 500k m=1
+R2 net4 VDD 5 m=1
+C1 Vout GND 1n m=1
+**** begin user architecture code
+
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+
+
+
+.control
+    save all
+
+    * Operating Point Analysis
+    op
+    show all > op.log
+
+    * DC Sweep
+    dc Vin 0 3.3 10m
+    plot v(vout) vs v(vin)
+
+    * AC Analysis
+    ac dec 100 100 1Meg
+    plot db(v(vout))
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  libs/core_differential_pair/nmos_differential_pair/nmos_differential_pair.sym # of pins=6
+** sym_path: /foss/designs/libs/core_differential_pair/nmos_differential_pair/nmos_differential_pair.sym
+** sch_path: /foss/designs/libs/core_differential_pair/nmos_differential_pair/nmos_differential_pair.sch
+.subckt nmos_differential_pair diff_drain1 diff_drain2 VSS diff_in2 diff_in1 diff_tail
+*.iopin diff_tail
+*.iopin diff_in1
+*.iopin diff_in2
+*.iopin diff_drain1
+*.iopin diff_drain2
+*.iopin VSS
+XM1 diff_drain1 VSS diff_in1 diff_tail unit_nmos M=4
+XM2 diff_drain2 VSS diff_in2 diff_tail unit_nmos M=4
+.ends
+
+
+* expanding   symbol:  libs/core_current_mirror/nmos_current_mirror/nmos_current_mirror.sym # of pins=7
+** sym_path: /foss/designs/libs/core_current_mirror/nmos_current_mirror/nmos_current_mirror.sym
+** sch_path: /foss/designs/libs/core_current_mirror/nmos_current_mirror/nmos_current_mirror.sch
+.subckt nmos_current_mirror 16x_I_ref 8x_I_ref 4x_I_ref 2x_I_ref 1x_I_ref I_ref VSS
+*.iopin I_ref
+*.iopin VSS
+*.iopin 1x_I_ref
+*.iopin 2x_I_ref
+*.iopin 4x_I_ref
+*.iopin 8x_I_ref
+*.iopin 16x_I_ref
+XIREF I_ref VSS I_ref VSS unit_nmos M=1
+X1x 1x_I_ref VSS I_ref VSS unit_nmos M=1
+X2x 2x_I_ref VSS I_ref VSS unit_nmos M=2
+X4x 4x_I_ref VSS I_ref VSS unit_nmos M=4
+X8x 8x_I_ref VSS I_ref VSS unit_nmos M=8
+X16x 16x_I_ref VSS I_ref VSS unit_nmos M=16
+.ends
+
+
+* expanding   symbol:  libs/core_current_mirror/pmos_current_mirror_sources_io/pmos_current_mirror_sources_io.sym # of pins=5
+** sym_path: /foss/designs/libs/core_current_mirror/pmos_current_mirror_sources_io/pmos_current_mirror_sources_io.sym
+** sch_path: /foss/designs/libs/core_current_mirror/pmos_current_mirror_sources_io/pmos_current_mirror_sources_io.sch
+.subckt pmos_current_mirror_sources_io src_ref src_1x 1x_I_ref I_ref VDD
+*.iopin I_ref
+*.iopin src_ref
+*.iopin 1x_I_ref
+*.iopin src_1x
+*.iopin VDD
+XIREF I_ref VDD I_ref src_ref unit_pmos M=1
+X1x 1x_I_ref VDD I_ref src_1x unit_pmos M=1
+.ends
+
+
+* expanding   symbol:  libs/core_single_mos/unit_nmos/unit_nmos.sym # of pins=4
+** sym_path: /foss/designs/libs/core_single_mos/unit_nmos/unit_nmos.sym
+** sch_path: /foss/designs/libs/core_single_mos/unit_nmos/unit_nmos.sch
+.subckt unit_nmos drain sub gate source
+*.iopin drain
+*.iopin source
+*.iopin sub
+*.iopin gate
+XM1 drain gate source sub nfet_03v3 L=0.5u W=12u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0 m={M}
+**** begin user architecture code
+
+.param M=1
+
+**** end user architecture code
+.ends
+
+
+* expanding   symbol:  libs/core_single_mos/unit_pmos/unit_pmos.sym # of pins=4
+** sym_path: /foss/designs/libs/core_single_mos/unit_pmos/unit_pmos.sym
+** sch_path: /foss/designs/libs/core_single_mos/unit_pmos/unit_pmos.sch
+.subckt unit_pmos drain sub gate source
+*.iopin drain
+*.iopin source
+*.iopin sub
+*.iopin gate
+**** begin user architecture code
+
+.param M=1
+
+**** end user architecture code
+XM1 drain gate source sub pfet_03v3 L=0.5u W=48u nf=8 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0 m={M}
+.ends
+
+.GLOBAL GND
+.end
